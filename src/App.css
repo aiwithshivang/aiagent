@@ -1,0 +1,98 @@
+.app-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--bg-deep-space);
+  position: relative;
+}
+
+/* ─── BACKGROUND LAYERS ─────────────────────────────── */
+.bg-layer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Deep animated star field */
+.bg-stars {
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 70%, rgba(0,245,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, rgba(157,0,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 80%, rgba(255,0,110,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 85%, rgba(0,245,255,0.4) 0%, transparent 100%);
+  background-size: 300px 300px, 200px 200px, 400px 400px, 250px 250px,
+                   350px 350px, 180px 180px, 220px 220px, 320px 320px,
+                   270px 270px, 190px 190px;
+  animation: stars-drift 80s linear infinite;
+}
+
+@keyframes stars-drift {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 300px 300px, 200px 200px, 400px 400px, 250px 250px,
+    350px 350px, 180px 180px, 220px 220px, 320px 320px, 270px 270px, 190px 190px; }
+}
+
+/* Perspective grid floor */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0,245,255,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform-origin: 50% 100%;
+  transform: perspective(600px) rotateX(75deg) scaleX(3);
+  top: auto; bottom: 0;
+  height: 60vh;
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Horizontal scanline sweep */
+.bg-scanline {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 245, 255, 0.04) 50%,
+    transparent 100%
+  );
+  height: 200px;
+  width: 100%;
+  animation: scanline-move 8s linear infinite;
+}
+
+/* Radial center vignette */
+.bg-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0,0,0,0.5) 70%,
+    rgba(0,0,0,0.9) 100%
+  );
+}
+
+/* ─── MAIN LAYOUT ──────────────────────────────────── */
+.dashboard-layout {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+}
